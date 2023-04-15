@@ -72,6 +72,7 @@
 **Write the following code to the main file**
 
 **Code:**
+``` cpp
 
 #include <iostream>
 
@@ -128,7 +129,7 @@ int main(void)
 `	`return 0;
 
 }
-
+```
 **Screen of code(is hidden):** 
 
 
