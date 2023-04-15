@@ -130,10 +130,6 @@ int main(void)
 
 }
 ```
-**Screen of code(is hidden):** 
-
-
-
 
 **Result:**
 
@@ -149,7 +145,7 @@ size\_t csh
 **-Architecture selection**
 
 **Code:**
-
+``` cpp
 enum cs\_arch {
 
 `	`CS\_ARCH\_ARM = 0,	///< ARM ( Thumb, Thumb-2)
@@ -181,12 +177,12 @@ enum cs\_arch {
 `	`CS\_ARCH\_ALL = 0xFFFF, // All architecture - for cs\_support()
 
 } cs\_arch;
-
+```
 **Note: Fill in the enumeration content for the cs\_arch parameter in the API, such as cs\_open (cs\_arch arch, cs\_mode mode, csh \*handle) in the API; fill in CS\_ARCH\_X86 for the first parameter to support the X86 architecture**
 ## **cs\_mode**
 **-** **Mode selection**
 
-
+``` cpp
 enum cs\_mode {
 
 `	`CS\_MODE\_LITTLE\_ENDIAN = 0,	             ///< little-endian 模式 (default 模式)
@@ -286,11 +282,11 @@ enum cs\_mode {
 `	`CS\_MODE\_MOS65XX\_65816\_LONG\_MX = CS\_MODE\_MOS65XX\_65816\_LONG\_M | CS\_MODE\_MOS65XX\_65816\_LONG\_X,
 
 } cs\_mode;
-
+```
 **Note: Fill in the enumeration content for the cs\_mode parameter in the API, such as cs\_open (cs\_arch arch, cs\_mode mode, csh \*handle) in the API; fill in CS\_MODE\_64 for the second parameter to support X64 mode**
 ## cs\_opt\_mem
 -Memory operation
-
+``` cpp
 struct cs\_opt\_mem {
 
 `	`cs\_malloc\_t malloc;
@@ -304,11 +300,11 @@ struct cs\_opt\_mem {
 `	`cs\_vsnprintf\_t vsnprintf;
 
 } cs\_opt\_mem;
-
+```
 Note: You can use the user-defined malloc/calloc/realloc/free/vsnprintf() function. By default, the system comes with malloc (), calloc(), realloc(), free() & vsnprintf().
 ## cs\_opt\_mnem
 \- Custom mnemonics
-
+``` cpp
 struct cs\_opt\_mnem {
 
 `	`/// Need a custom instruction ID
@@ -320,10 +316,10 @@ struct cs\_opt\_mnem {
 `	`const char \*mnemonic;
 
 } cs\_opt\_mnem;
-
+```
 ## cs\_opt\_type
 -Decompiled runtime options
-
+``` cpp
 enum cs\_opt\_type {
 
 `	`CS\_OPT\_INVALID = 0,   //No special requirements
@@ -345,13 +341,13 @@ enum cs\_opt\_type {
 `	`CS\_OPT\_UNSIGNED,        //Print immediate operands in unsigned form
 
 } cs\_opt\_type;
-
+```
 **Not called in the currently open API**
 ## **cs\_ac\_type**
 -Common instruction operand access types, consistent in all architectures, access types can be combined, for example: CS\_AC\_READ | CS\_AC\_WRITE
 
 Code:
-
+``` cpp
 enum cs\_ac\_type {
 
 `	`CS\_AC\_INVALID = 0,        //Uninitialized/invalid access type
@@ -361,14 +357,14 @@ enum cs\_ac\_type {
 `	`CS\_AC\_WRITE   = 1 << 1,   //The operand is written from memory or register
 
 } cs\_ac\_type;
-
+```
 Not called in the currently open API
 
 ## cs\_group\_type
 \- Common instruction set, consistent across all architectures
 
 Code:
-
+``` cpp
 cs\_group\_type {
 
 `	`CS\_GRP\_INVALID = 0,  //Uninitialized/invalid instruction set
@@ -388,7 +384,7 @@ cs\_group\_type {
 `	`CS\_GRP\_BRANCH\_RELATIVE, //All relevant branch instructions
 
 } cs\_group\_type;
-
+```
 Not called in the currently open API
 ## cs\_opt\_skipdata
 -User-defined settings SKIPDATA options
@@ -406,7 +402,7 @@ Not called in the currently open API
 
 
 Code:
-
+``` cpp
 struct cs\_opt\_skipdata {
 
 `	`/// CAPSTONE BELIEVES THAT THE DATA TO BE SKIPPED IS A SPECIAL "INSTRUCTION”
@@ -458,7 +454,7 @@ struct cs\_opt\_skipdata {
 `	`void \*user\_data;
 
 } cs\_opt\_skipdata;
-
+```
 Not called in the currently open API
 ## cs\_detail
 -Note: All information in cs\_detail is only available when CS\_OPT\_DETAIL = CS\_OPT\_ON
@@ -477,7 +473,7 @@ If cs\_detail changes, especially if a field is added after union, then update a
 
 
 Code:
-
+``` cpp
 struct cs\_detail {
 
 `	`uint16\_t regs\_read[16]; ///< This parameter reads the list of implicit registers
@@ -531,7 +527,7 @@ struct cs\_detail {
 `	`};
 
 } cs\_detail;
-
+```
 
 
 
@@ -544,7 +540,7 @@ struct cs\_detail {
 \- Instruction details
 
 Code:
-
+``` cpp
 struct cs\_insn {
 
 `	`/// Instruction ID (basically a numeric ID used for instruction mnemonics)
@@ -600,7 +596,7 @@ struct cs\_insn {
 `	`cs\_detail \*detail;
 
 } cs\_insn;
-
+```
 ## cs\_err
 -The return value of cs\_errno() for various types of errors encountered by the Capstone API
 
@@ -610,7 +606,7 @@ struct cs\_insn {
 
 
 Code:
-
+``` cpp
 typedef enum cs\_err {
 
 `	`CS\_ERR\_OK = 0,    ///< No error
@@ -644,7 +640,7 @@ typedef enum cs\_err {
 `	`CS\_ERR\_X86\_MASM,  ///< X86 INTEL syntax is not supported (exit at compile time)
 
 } cs\_err;
-
+```
 # **0x2 API**
 ## cs\_version
 unsigned int CAPSTONE\_API cs\_version(int \*major, int \*minor);
@@ -662,7 +658,7 @@ This version is defined in cs.In c, it cannot be changed after compilation, and 
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.008.png)![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.009.png)
 
 Code:
-
+``` cpp
 #include <stdio.h>
 
 #include <stdlib.h>
@@ -690,9 +686,9 @@ int main()
 `	`return 0;
 
 }
-
+```
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.010.png)
-
+``` cpp
 
 
 
@@ -736,7 +732,7 @@ int main()
 `	`return 0;
 
 }
-
+```
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.011.png)
 
 Visible and cannot be changed
@@ -753,7 +749,7 @@ Used to check whether the capstone library supports the architecture of paramete
 
 
 Code:
-
+``` cpp
 bool CAPSTONE\_API cs\_support(int query)
 
 {
@@ -809,7 +805,7 @@ bool CAPSTONE\_API cs\_support(int query)
 `	`return false;
 
 }
-
+```
 Example 1 (CS\_ARCH\_ALL, check whether all architectures are supported)
 
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.012.png)
@@ -833,7 +829,7 @@ Example 4 (check if it is in X86\_REDUCE compilation mode):
 void\* (CAPSTONE\_API \*cs\_malloc\_t)(size\_t size);
 
 Dynamic memory allocation of cs, used for
-
+``` cpp
 struct cs\_opt\_mem {
 
 `	`cs\_malloc\_t malloc;
@@ -847,7 +843,7 @@ struct cs\_opt\_mem {
 `	`cs\_vsnprintf\_t vsnprintf;
 
 } cs\_opt\_mem;
-
+```
 In user mode, cs\_mem\_malloc uses system malloc by default
 
 In Windows driver mode, cs\_malloc\_t cs\_mem\_malloc = cs\_winkernel\_malloc;
@@ -855,7 +851,7 @@ In Windows driver mode, cs\_malloc\_t cs\_mem\_malloc = cs\_winkernel\_malloc;
 cs\_winkernel\_malloc is defined in \capstone-4.0.1\windows\winkernel\_mm.c,
 
 Code:
-
+``` cpp
 void \* CAPSTONE\_API cs\_winkernel\_malloc(size\_t size)
 
 {
@@ -897,7 +893,7 @@ void \* CAPSTONE\_API cs\_winkernel\_malloc(size\_t size)
 `	`return block->data;
 
 }
-
+```
 In OSX kernel mode, cs\_malloc\_t cs\_mem\_malloc = kern\_os\_malloc;, will not be discussed here for the time being.
 ## cs\_calloc\_t
 void\* (CAPSTONE\_API \*cs\_calloc\_t)(size\_t nmemb, size\_t size);
@@ -911,7 +907,7 @@ User mode: cs\_calloc\_t cs\_mem\_calloc = calloc;, use system calloc
 Windows driver mode: cs\_calloc\_t cs\_mem\_calloc = cs\_winkernel\_calloc;
 
 Code:
-
+``` cpp
 void \* CAPSTONE\_API cs\_winkernel\_calloc(size\_t n, size\_t size)
 
 {
@@ -929,7 +925,7 @@ void \* CAPSTONE\_API cs\_winkernel\_calloc(size\_t n, size\_t size)
 `	`return RtlFillMemory(new\_ptr, total, 0);
 
 }
-
+```
 OSX kernel mode: cs\_calloc\_t cs\_mem\_calloc = cs\_kern\_os\_calloc; directly call kern\_os\_malloc
 
 ## cs\_realloc\_t
@@ -955,7 +951,7 @@ Windows driver mode: cs\_realloc\_t cs\_mem\_realloc = cs\_winkernel\_realloc;
 Code:
 
 void \* CAPSTONE\_API cs\_winkernel\_realloc(void \*ptr, size\_t size)
-
+``` cpp
 {
 
 `	`void \*new\_ptr = NULL;
@@ -989,7 +985,7 @@ void \* CAPSTONE\_API cs\_winkernel\_realloc(void \*ptr, size\_t size)
 `	`return new\_ptr;
 
 }
-
+```
 OSX kernel mode: cs\_realloc\_t cs\_mem\_realloc = kern\_os\_realloc;
 ## cs\_free\_t
 typedef void (CAPSTONE\_API \*cs\_free\_t)(void \*ptr);
@@ -1030,7 +1026,7 @@ Use vsnprintf() when you need to return a value and set a null terminator
 Windows driver mode: cs\_vsnprintf\_t cs\_vsnprintf = cs\_winkernel\_vsnprintf;
 
 int CAPSTONE\_API cs\_winkernel\_vsnprintf(char \*buffer, size\_t count, const char \*format, va\_list argptr)
-
+```
 {
 
 `	`int result = \_vsnprintf(buffer, count, format, argptr);
@@ -1066,7 +1062,7 @@ int CAPSTONE\_API cs\_winkernel\_vsnprintf(char \*buffer, size\_t count, const c
 `	`return result;
 
 }
-
+```
 OSX kernel mode: cs\_vsnprintf\_t cs\_vsnprintf= vsnprintf;, use the default vsnprintf
 ## cs\_skipdata\_cb\_t
 size\_t (CAPSTONE\_API \*cs\_skipdata\_cb\_t)(const uint8\_t \*code, size\_t code\_size, size\_t offset, void \*user\_data);
@@ -1085,6 +1081,7 @@ Return: Returns the number of bytes to be skipped, or 0 means that disassembly i
 
 cs\_skipdata\_cb\_t is called in struct cs\_opt\_skipdata
 ### Code:
+``` cpp
 #include <stdio.h>
 
 #include <stdlib.h>
@@ -1284,7 +1281,7 @@ int main()
 `	`return 0;
 
 }
-
+```
 The running result is as follows, the default.The byte data type is changed to the db descriptor
 
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.016.png)
@@ -1325,7 +1322,7 @@ Return: CS\_ERR\_OK is returned after successful creation, otherwise the corresp
 
 
 ### Code:
-
+``` cpp
 
 cs\_err CAPSTONE\_API cs\_open(cs\_arch arch, cs\_mode mode, csh \*handle)
 
@@ -1402,14 +1399,14 @@ cs\_err CAPSTONE\_API cs\_open(cs\_arch arch, cs\_mode mode, csh \*handle)
 `	`}
 
 }
-
+```
 
 
 
 Among them, the cs\_struct structure contains more detailed settings, as follows:
 
 Code:
-
+``` cpp
 struct cs\_struct {
 
 `	`cs\_arch arch;
@@ -1461,7 +1458,7 @@ struct cs\_struct {
 `	`struct insn\_mnem \*mnem\_list;	// List of links to custom instruction mnemonics
 
 };
-
+```
 Example (create a cs handle of type x86\_64)
 
 cs\_open(CS\_ARCH\_X86, CS\_MODE\_64, &handle)
@@ -1479,7 +1476,7 @@ The essence of releasing the handle is to set the handle value to 0.
 
 
 Code:
-
+``` cpp
 cs\_err CAPSTONE\_API cs\_close(csh \*handle)
 
 {
@@ -1527,7 +1524,7 @@ cs\_err CAPSTONE\_API cs\_close(csh \*handle)
 `	`return CS\_ERR\_OK;
 
 }
-
+```
 Example
 
 cs\_close(&handle);
@@ -1546,6 +1543,7 @@ Return: The setting successfully returns CS\_ERR\_OK, otherwise the error messag
 
 Note: In the case of CS\_OPT\_MEM, handle can be any value, so cs\_option (handle, CS\_OPT\_MEM, value) must be called before cs\_open()
 ### Code:
+``` cpp
 cs\_err CAPSTONE\_API cs\_option(csh ud, cs\_opt\_type type, size\_t value)
 
 {
@@ -1737,6 +1735,7 @@ cs\_err CAPSTONE\_API cs\_option(csh ud, cs\_opt\_type type, size\_t value)
 `	`return cs\_arch\_option[handle->arch](handle, type, value);
 
 }
+```
 ### Example, change the syntax displayed after disassembly
 
 
@@ -1759,7 +1758,7 @@ cs\_err CAPSTONE\_API cs\_option(csh ud, cs\_opt\_type type, size\_t value)
 
 
 Code:
-
+``` cpp
 #include <iostream>
 
 #include <stdio.h>
@@ -1817,7 +1816,7 @@ int main(void)
 `	`return 0;
 
 }
-
+```
 output
 
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.017.png)
@@ -1831,7 +1830,7 @@ Return: CS\_ERR\_OK is returned without error, otherwise the error message of cs
 Judge that the handle does not exist and return CS\_ERR\_CSH directly
 
 Code:
-
+``` cpp
 #include <iostream>
 
 #include <stdio.h>
@@ -1869,7 +1868,7 @@ int main(void)
 `	`return 0;
 
 }
-
+```
 Output, error code 4 is CS\_ERR\_CSH
 
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.018.png)
@@ -1884,7 +1883,7 @@ Convert the error code output from the previous API into a detailed error messag
 
 
 Code:
-
+``` cpp
 const char \* CAPSTONE\_API cs\_strerror(cs\_err code)
 
 {
@@ -1958,10 +1957,11 @@ const char \* CAPSTONE\_API cs\_strerror(cs\_err code)
 `	`}
 
 }
-
+```
 Example, used in combination with cs\_errno:
 
 Code:
+``` cpp
 
 #include <iostream>
 
@@ -2000,7 +2000,7 @@ int main(void)
 `	`return 0;
 
 }
-
+```
 ouput
 
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.019.png)
@@ -2027,6 +2027,8 @@ count: The number of instructions that need to be decomposed, or enter 0 to deco
 
 Return: The number of instructions successfully disassembled. If the function fails to disassemble the given code, it is 0. When it fails, call cs\_errno() to get the error code.
 ### Code:
+``` cpp
+
 size\_t CAPSTONE\_API cs\_disasm(csh ud, const uint8\_t \*buffer, size\_t size, uint64\_t offset, size\_t count, cs\_insn \*\*insn)
 
 {
@@ -2352,11 +2354,13 @@ size\_t CAPSTONE\_API cs\_disasm(csh ud, const uint8\_t \*buffer, size\_t size, 
 `	`return c;
 
 }
+```
 ### Example, x86\_64
 
 
 
 Code:
+``` cpp
 
 #include <iostream>
 
@@ -2415,7 +2419,7 @@ int main(void)
 `	`return 0;
 
 }
-
+```
 
 
 
@@ -2435,6 +2439,7 @@ insn: Pointer returned by the @insn parameter in cs\_disasm() or cs\_malloc()
 count: Assign the number of cs\_insn structures returned by cs\_disasm(), or assign a value of 1 to indicate the number of free memory allocated by cs\_malloc()
 
 Code:
+``` cpp
 
 void CAPSTONE\_API cs\_free(cs\_insn \*insn, size\_t count)
 
@@ -2456,9 +2461,10 @@ Directly call cs\_mem\_free, which is the default free
 
 
 Example (free up the memory requested by cs\_disasm)
-
+```
 Code:
 
+``` cpp
 
 
 
@@ -2477,6 +2483,7 @@ count = cs\_disasm(handle, (unsigned char\*)CODE, sizeof(CODE) - 1, 0x1000, 0, &
 `		`cs\_free(insn, count);   // The loop releases the memory of each INSN in turn
 
 `	`}
+```
 ## cs\_malloc
 cs\_insn \* CAPSTONE\_API cs\_malloc(csh handle);
 
@@ -2485,6 +2492,7 @@ Is used to allocate memory for an instruction in API cs\_disasm\_iter()
 Handle: The handle returned by cs\_open()
 
 Code:
+``` cpp
 
 cs\_insn \* CAPSTONE\_API cs\_malloc(csh ud)
 
@@ -2533,7 +2541,7 @@ cs\_insn \* CAPSTONE\_API cs\_malloc(csh ud)
 `	`return insn;
 
 }
-
+```
 When the memory occupied by this instruction is no longer used, use cs\_free (insn, 1) to release it. The example is at cs\_disasm\_iter below.
 
 
@@ -2574,6 +2582,8 @@ Code implementation, using dynamic memory allocation on the basis of cs\_disasm
 
 
 ### Code:
+``` cpp
+
 bool CAPSTONE\_API cs\_disasm\_iter(csh ud, const uint8\_t \*\*code, size\_t \*size,
 
 `		`uint64\_t \*address, cs\_insn \*insn)
@@ -2717,7 +2727,7 @@ bool CAPSTONE\_API cs\_disasm\_iter(csh ud, const uint8\_t \*\*code, size\_t \*s
 }
 
 
-
+```
 
 
 
@@ -2725,6 +2735,8 @@ bool CAPSTONE\_API cs\_disasm\_iter(csh ud, const uint8\_t \*\*code, size\_t \*s
 
 
 ### Code:
+``` cpp
+
 #include <iostream>
 
 #include <stdio.h>
@@ -2976,6 +2988,7 @@ int main()
 `	`return 0;
 
 }
+```
 ### output
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.021.png)
 
@@ -2994,6 +3007,7 @@ reg\_id: register id
 Return: The character name of the register, return NULL if reg\_id is not available
 
 Code:
+``` cpp
 
 const char \* CAPSTONE\_API cs\_reg\_name(csh ud, unsigned int reg)
 
@@ -3010,10 +3024,11 @@ const char \* CAPSTONE\_API cs\_reg\_name(csh ud, unsigned int reg)
 `	`return handle->reg\_name(ud, reg);
 
 }
-
+```
 Example (print RAX)
 
 Code:
+``` cpp
 
 #include <iostream>
 
@@ -3050,7 +3065,7 @@ int main(void)
 `	`return 0;
 
 }
-
+```
 output
 
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.022.png)
@@ -3074,6 +3089,7 @@ insn\_id: instruction id
 return: The character name of the instruction, return NULL if insn\_id is not available
 
 Code:
+``` cpp
 
 const char \* CAPSTONE\_API cs\_insn\_name(csh ud, unsigned int insn)
 
@@ -3092,7 +3108,7 @@ const char \* CAPSTONE\_API cs\_insn\_name(csh ud, unsigned int insn)
 `	`return handle->insn\_name(ud, insn);
 
 }
-
+```
 
 
 
@@ -3107,6 +3123,8 @@ const char \* CAPSTONE\_API cs\_insn\_name(csh ud, unsigned int insn)
 
 
 ### Code#2:
+``` cpp
+
 #include <iostream>
 
 #include <stdio.h>
@@ -3258,6 +3276,7 @@ int main()
 `	`return 0;
 
 }
+```
 ### output
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.023.png)
 
@@ -3302,6 +3321,7 @@ Return: True if the instruction does belong to the given instruction type, false
 
 
 Code:
+``` cpp
 
 bool CAPSTONE\_API cs\_insn\_group(csh ud, const cs\_insn \*insn, unsigned int group\_id)
 
@@ -3350,7 +3370,7 @@ bool CAPSTONE\_API cs\_insn\_group(csh ud, const cs\_insn \*insn, unsigned int g
 `	`return arr\_exist8(insn->detail->groups, insn->detail->groups\_count, group\_id);
 
 }
-
+```
 Example (to determine whether it belongs to a jump instruction)
 
 
@@ -3367,6 +3387,8 @@ Example (to determine whether it belongs to a jump instruction)
 
 
 ### Code:
+``` cpp
+
 #include <iostream>
 
 #include <stdio.h>
@@ -3518,6 +3540,7 @@ int main()
 `	`return 0;
 
 }
+```
 ### output
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.024.png)
 ## cs\_reg\_read
@@ -3548,6 +3571,7 @@ Return: True if the instruction does implicitly use the given register, otherwis
 
 
 Code:
+``` cpp
 
 bool CAPSTONE\_API cs\_reg\_read(csh ud, const cs\_insn \*insn, unsigned int reg\_id)
 
@@ -3588,7 +3612,7 @@ bool CAPSTONE\_API cs\_reg\_read(csh ud, const cs\_insn \*insn, unsigned int reg
 `	`return arr\_exist(insn->detail->regs\_read, insn->detail->regs\_read\_count, reg\_id);
 
 }
-
+```
 The example is the same as API cs\_disasm\_iter
 ## cs\_reg\_write
 bool CAPSTONE\_API cs\_reg\_write(csh handle, const cs\_insn \*insn, unsigned int reg\_id);
@@ -3611,6 +3635,7 @@ Return: True if the instruction does implicitly modify the given register, other
 
 
 Code:
+``` cpp
 
 bool CAPSTONE\_API cs\_reg\_write(csh ud, const cs\_insn \*insn, unsigned int reg\_id)
 
@@ -3659,7 +3684,7 @@ bool CAPSTONE\_API cs\_reg\_write(csh ud, const cs\_insn \*insn, unsigned int re
 `	`return arr\_exist(insn->detail->regs\_write, insn->detail->regs\_write\_count, reg\_id);
 
 }
-
+```
 The example is the same as API cs\_disasm\_iter
 
 ## cs\_op\_count
@@ -3685,6 +3710,8 @@ Return: The number of operands of the given type op\_type in the instruction ins
 
 
 ### Code:
+``` cpp
+
 int CAPSTONE\_API cs\_op\_count(csh ud, const cs\_insn \*insn, unsigned int op\_type)
 
 {
@@ -3862,9 +3889,10 @@ int CAPSTONE\_API cs\_op\_count(csh ud, const cs\_insn \*insn, unsigned int op\_
 `	`return count;
 
 }
-
+```
 ### Example of x86 instruction opcode type (judgment register opcode)
 Code:
+``` cpp
 
 typedef enum x86\_op\_type {
 
@@ -4029,6 +4057,7 @@ int main()
 `	`return 0;
 
 }
+```
 ### output
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.025.png)
 ## cs\_op\_index
@@ -4058,6 +4087,7 @@ return:`<arch> of the instruction insn.operands[]'The index of the operand of th
 
 
 ### Code:
+``` cpp
 int CAPSTONE\_API cs\_op\_index(csh ud, const cs\_insn \*insn, unsigned int op\_type,
 
 `		`unsigned int post)
@@ -4289,9 +4319,10 @@ int CAPSTONE\_API cs\_op\_index(csh ud, const cs\_insn \*insn, unsigned int op\_
 `	`return -1;
 
 }
+  ```
 ### Exapmle with program
 Code:
-
+``` cpp
 #include <iostream>
 
 #include <stdio.h>
@@ -4479,6 +4510,7 @@ int main()
 `	`return 0;
 
 }
+  ```
 ### output ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.026.png)
 
 ## cs\_regs\_access
@@ -4512,7 +4544,7 @@ CS\_ERR\_OK is returned on success, and other values are returned on failure (pl
 
 
 Code:
-
+``` cpp
 cs\_err CAPSTONE\_API cs\_regs\_access(csh ud, const cs\_insn \*insn,
 
 `		`cs\_regs regs\_read, uint8\_t \*regs\_read\_count,
@@ -4582,6 +4614,7 @@ cs\_err CAPSTONE\_API cs\_regs\_access(csh ud, const cs\_insn \*insn,
 #endif
 
 }
+  ```
 ### Example with program
 
 
@@ -4589,7 +4622,7 @@ cs\_err CAPSTONE\_API cs\_regs\_access(csh ud, const cs\_insn \*insn,
 
 
 Code:
-
+``` cpp
 #include <iostream>
 
 #include <stdio.h>
@@ -4789,5 +4822,6 @@ int main()
 `	`return 0;
 
 }
+  ```
 ### output
 ![](Aspose.Words.544225a0-885d-44b8-b1be-91bcb8381e8b.027.png)
