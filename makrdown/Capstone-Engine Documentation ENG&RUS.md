@@ -3,7 +3,7 @@
 
 *Official API document by [kabeor*](https://github.com/kabeor)*
 
-*Translated by Marius aka OSPFvX.*
+*Translated by Nitr0-G.*
 # Capstone Engine is a binary disassembly engine that supports multiple hardware architectures.
 # **0x0 development preparation**
 **Capstone official website: [http://www.capstone-engine.org**](http://www.capstone-engine.org)**
