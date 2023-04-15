@@ -73,15 +73,15 @@
 
 **Code:**
 
-//#include <iostream>
+#include <iostream>
 
-//#include <stdio.h>
+#include <stdio.h>
 
-//#include <cinttypes>  
+#include <cinttypes>  
 
-//#include "capstone.h"
+#include "capstone.h"
 
-//using namespace std;
+using namespace std;
 
 #define CODE "\x55\x48\x8b\x05\xb8\x13\x00\x00"
 
